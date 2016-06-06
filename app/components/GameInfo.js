@@ -19,3 +19,4 @@ export default class GameInfo extends React.Component {
     );
   }
 }
+ 
