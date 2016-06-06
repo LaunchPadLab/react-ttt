@@ -10,6 +10,9 @@ module.exports = {
   },
 
   plugins: {
-    babel: {presets: ['es2015', 'react', 'stage-0']}
+    babel: {
+      presets: ['es2015', 'react', 'stage-0'],
+      plugins: ['babel-plugin-transform-decorators-legacy']
+    }
   }
 };
