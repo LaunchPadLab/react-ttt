@@ -1,11 +1,11 @@
 {
-  "name": "your-app",
-  "description": "Description",
+  "name": "React Tic-Tac-Toe",
+  "description": "",
   "author": "Your Name",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/LaunchPadLab/react-ttt"
   },
   "scripts": {
     "start": "brunch watch --server",
