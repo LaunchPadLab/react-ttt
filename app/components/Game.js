@@ -21,16 +21,16 @@ export default class Game extends React.Component {
   }
 
   squareClick(position, turn){
-    var board = this.state.board;
+    let board = this.state.board;
     if ( (board[position] === 'X' || board[position] === 'O') || (this.state.winner != undefined) ) return;
     board[position] = turn;
     this.setState({board: board, turn: turn === 'X' ? 'O' : 'X', winner: this.checkWinner()});
   }
 
   checkWinner() {
-    var board = this.state.board;
+    let board = this.state.board;
     const checkEqual = (s1,s2,s3) => {
-      var concat = s1+s2+s3;
+      let concat = s1+s2+s3;
       return concat === 'XXX' || concat === 'OOO';
     }
 
