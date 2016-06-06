@@ -4,6 +4,10 @@ import autobind from 'autobind-decorator';
 @autobind
 export default class Square extends React.Component {
 
+  constructor() {
+    super();
+  }
+
   clickHandler() {
     this.props.squareClick(this.props.pos, this.props.turn);
   }

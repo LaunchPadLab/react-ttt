@@ -22,26 +22,25 @@ export default class Game extends React.Component {
 
   squareClick(position, turn){
     let board = this.state.board;
-    if ( (board[position] === 'X' || board[position] === 'O') || (this.state.winner != undefined) ) return;
+    if ( (board[position] === 'X' || board[position] === 'O') || (this.state.winner !== undefined) ) return;
     board[position] = turn;
     this.setState({board: board, turn: turn === 'X' ? 'O' : 'X', winner: this.checkWinner()});
   }
 
   checkWinner() {
     let board = this.state.board;
-    const checkEqual = (s1,s2,s3) => {
-      let concat = s1+s2+s3;
-      return concat === 'XXX' || concat === 'OOO';
+    const checkEqual = (s) => {
+      return s === 'XXX' || s === 'OOO';
     }
 
-    if (checkEqual(board[0],board[1],board[2])) return board[0];
-    if (checkEqual(board[3],board[4],board[5])) return board[3];
-    if (checkEqual(board[6],board[7],board[8])) return board[6];
-    if (checkEqual(board[0],board[3],board[6])) return board[0];
-    if (checkEqual(board[1],board[4],board[7])) return board[1];
-    if (checkEqual(board[2],board[5],board[8])) return board[2];
+    if (checkEqual(board[0]+board[1]+board[2])) return board[0];
+    if (checkEqual(board[3]+board[4]+board[5])) return board[3];
+    if (checkEqual(board[6]+board[7]+board[8])) return board[6];
+    if (checkEqual(board[0]+board[3]+board[6])) return board[0];
+    if (checkEqual(board[1]+board[4]+board[7])) return board[1];
+    if (checkEqual(board[2]+board[5]+board[8])) return board[2];
 
-    if (board.join('').length == 9) return 'complete';
+    if (board.join('').length === 9) return 'none';
     return undefined;
   }
 
