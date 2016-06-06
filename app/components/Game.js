@@ -29,7 +29,7 @@ export default class Game extends React.Component {
 
   checkWinner() {
     var board = this.state.board;
-
+    //need to complete this logic
   }
 
   newGame() {
