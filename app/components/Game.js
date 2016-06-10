@@ -1,13 +1,13 @@
 import React from 'react';
 import GameInfo from './GameInfo';
 import Square from './Square'
-import autobind from 'autobind-decorator';
 
-@autobind
 export default class Game extends React.Component {
 
   constructor() {
     super();
+
+    // this.squareClick = this.squareClick.bind(this);
 
     this.state = {
       board : [
@@ -17,18 +17,19 @@ export default class Game extends React.Component {
               ],
       turn : 'X',
       winner : undefined
+      // use another state var to define state of game overall
     }
   }
 
-  squareClick(position, turn){
-    let board = this.state.board;
-    if ( (board[position] === 'X' || board[position] === 'O') || (this.state.winner !== undefined) ) return;
+  squareClick(position) {
+    const { board, turn, winner } = this.state;
+    if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return;
     board[position] = turn;
     this.setState({board: board, turn: turn === 'X' ? 'O' : 'X', winner: this.checkWinner()});
   }
 
   checkWinner() {
-    let board = this.state.board;
+    const board = this.state.board;
     const checkEqual = (s) => {
       return s === 'XXX' || s === 'OOO';
     }
@@ -61,7 +62,7 @@ export default class Game extends React.Component {
         <div id='game'>
           {this.state.board.map((square, pos) => {
             return (
-              <Square key={pos} value={square} pos={pos} turn={this.state.turn} squareClick={this.squareClick} />
+              <Square key={pos} value={square} squareClick={this.squareClick.bind(this, pos)} />
             );
           })}
         </div>
