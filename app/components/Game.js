@@ -13,13 +13,13 @@ export default class Game extends React.Component {
 
     this.state =
       {
-        board : [
-                  '','','',
-                  '','','',
-                  '','',''
-                ],
-        turn : 'X',
-        winner : undefined,
+        board :     [
+                      '','','',
+                      '','','',
+                      '','',''
+                    ],
+        turn :      'X',
+        winner :    undefined,
         gameState : 'not_started'
       }
   }
@@ -28,12 +28,13 @@ export default class Game extends React.Component {
     const { board, turn, winner } = this.state;
     if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return;
     board[position] = turn;
+
     this.setState (
       {
-        board: board,
-        turn: GameLogic.checkTurn(turn),
-        winner: GameLogic.checkWinner(board)
-        // gameState: GameLogic.checkGameState(board)
+        board:  board,
+        turn:   GameLogic.checkTurn(turn),
+        winner: GameLogic.checkWinner(board),
+        gameState: GameLogic.checkGameState(board, winner)
       }
     );
   }

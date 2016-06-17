@@ -15,6 +15,13 @@ let GameLogic = {
   //   )
   // },
 
+  checkGameState : function(board, winner) {
+    if (winner !== undefined || (board.join('').length === 9)) return 'finished';
+    if (winner === 'none' && (board.join('').length === 9)) return 'draw';
+    if (board.includes('X') || board.includes('O')) return 'started';
+    return 'not_started';
+  },
+
   setTitle : function(props) {
     const { winner, turn } = props;
 
