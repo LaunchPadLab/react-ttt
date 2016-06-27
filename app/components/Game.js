@@ -11,7 +11,7 @@ export default class Game extends React.Component {
     this.state = GameLogic.getInitialState();
   }
 
-  squareClick(position) {
+  clickHandler(position) {
     const { board, turn, winner, gameState } = GameLogic.setGameState(this.state, position);
 
     this.setState (
@@ -34,7 +34,7 @@ export default class Game extends React.Component {
         <div id='game'>
           {this.state.board.map((square, pos) => {
             return (
-              <Square key={pos} value={square} squareClick={this.squareClick.bind(this, pos)} />
+              <Square key={pos} value={square} clickHandler={this.clickHandler.bind(this, pos)} />
             );
           })}
         </div>
