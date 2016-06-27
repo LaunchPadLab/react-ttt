@@ -8,48 +8,24 @@ export default class Game extends React.Component {
   constructor() {
     super();
 
-    // this.squareClick = this.squareClick.bind(this);
-    // this.newGame     = this.newGame.bind(this);
-
-    this.state =
-      {
-        board :     [
-                      '','','',
-                      '','','',
-                      '','',''
-                    ],
-        turn :      'X',
-        winner :    undefined,
-        gameState : 'not_started'
-      }
+    this.state = GameLogic.getInitialState();
   }
 
   squareClick(position) {
-    const { board, turn, winner } = this.state;
-    if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return;
-    board[position] = turn;
+    const { board, turn, winner, gameState } = GameLogic.checkGameState(this.state, position);
 
     this.setState (
       {
-        board:  board,
-        turn:   GameLogic.checkTurn(turn),
-        winner: GameLogic.checkWinner(board),
-        gameState: GameLogic.checkGameState(board, winner)
+        board: board,
+        turn: turn,
+        winner: winner,
+        gameState: gameState
       }
     );
   }
 
   newGame() {
-    this.setState({
-      board : [
-                '','','',
-                '','','',
-                '','',''
-              ],
-      turn : 'X',
-      winner : undefined,
-      gameState : 'not_started'
-    });
+    this.setState(GameLogic.getInitialState());
   }
 
   render() {
