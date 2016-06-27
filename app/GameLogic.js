@@ -13,43 +13,15 @@ let GameLogic = {
       }
   },
 
-  setGameState : function(state, position) {
-    var { board, turn, gameState, winner } = state;
-
-    if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return state;
-
-    board[position] = turn;
-    winner = GameLogic.getWinner(board);
-    turn = GameLogic.getTurn(turn);
-    gameState = GameLogic.getGameState(winner, board);
-
-    return { board, turn, winner, gameState };
-  },
-
   getGameState : function(winner, board) {
-    if (winner === 'none' && (board.join('').length === 9)) {
-      return 'draw';
-    } else if (winner !== undefined || (board.join('').length === 9)) {
+    if (winner !== undefined) {
       return 'finished';
+    } else if (board.join('').length === 9) {
+      return 'draw';
     } else if (board.includes('X') || board.includes('O')) {
       return 'started';
     } else {
       return 'not_started';
-    }
-  },
-
-  setGameTitle : function(props) {
-    const { winner, turn, gameState } = props;
-
-    switch (gameState) {
-      case 'draw':
-        return "Draw Game";
-      case 'started':
-        return `Player ${turn}'s turn`;
-      case 'finished':
-       return `Player ${winner} won!`;
-      default:
-        return 'Player X goes first!';
     }
   },
 
@@ -70,12 +42,39 @@ let GameLogic = {
     if (GameLogic.checkEqual(board[0]+board[4]+board[8])) return board[0];
     if (GameLogic.checkEqual(board[2]+board[4]+board[6])) return board[2];
 
-    if (board.join('').length === 9) return 'none';
     return undefined;
   },
 
   checkEqual : function(s) {
     return s === 'XXX' || s === 'OOO';
+  },
+
+  setGameState : function(state, position) {
+    var { board, turn, gameState, winner } = state;
+
+    if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return state;
+
+    board[position] = turn;
+    winner = GameLogic.getWinner(board);
+    turn = GameLogic.getTurn(turn);
+    gameState = GameLogic.getGameState(winner, board);
+
+    return { board, turn, winner, gameState };
+  },
+
+  setGameTitle : function(props) {
+    const { winner, turn, gameState } = props;
+
+    switch (gameState) {
+      case 'draw':
+        return "Draw Game";
+      case 'started':
+        return `Player ${turn}'s turn`;
+      case 'finished':
+       return `Player ${winner} won!`;
+      default:
+        return 'Player X goes first!';
+    }
   }
 }
 
