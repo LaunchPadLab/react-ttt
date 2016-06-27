@@ -8,7 +8,12 @@ export default class Game extends React.Component {
   constructor() {
     super();
 
-    this.state = GameLogic.getInitialState();
+    this.state = {
+      board: [],
+      turn: '',
+      winner: undefined,
+      gameState: ''
+    };
   }
 
   clickHandler(position) {
@@ -31,13 +36,16 @@ export default class Game extends React.Component {
   render() {
     return (
       <div>
-        <div id='game'>
-          {this.state.board.map((square, pos) => {
-            return (
-              <Square key={pos} value={square} clickHandler={this.clickHandler.bind(this, pos)} />
-            );
-          })}
-        </div>
+        { this.state.gameState ?
+          <div id='game'>
+            {this.state.board.map((square, pos) => {
+              return (
+                <Square key={pos} value={square} clickHandler={this.clickHandler.bind(this, pos)} />
+              );
+            })}
+          </div>
+          : null
+        }
         <GameInfo turn={this.state.turn} winner={this.state.winner} resetAction={this.newGame.bind(this)} gameState={this.state.gameState} />
       </div>
     );
