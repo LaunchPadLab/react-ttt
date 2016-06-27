@@ -12,7 +12,7 @@ export default class Game extends React.Component {
   }
 
   squareClick(position) {
-    const { board, turn, winner, gameState } = GameLogic.checkGameState(this.state, position);
+    const { board, turn, winner, gameState } = GameLogic.setGameState(this.state, position);
 
     this.setState (
       {

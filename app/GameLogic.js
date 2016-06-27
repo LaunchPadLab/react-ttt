@@ -13,30 +13,32 @@ let GameLogic = {
       }
   },
 
-  checkGameState : function(state, position) {
+  setGameState : function(state, position) {
     var { board, turn, gameState, winner } = state;
 
-    winner = GameLogic.checkWinner(board);
-    turn = GameLogic.checkTurn(turn);
-
-    if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return;
+    if ( (board[position] === 'X' || board[position] === 'O') || (winner !== undefined) ) return state;
 
     board[position] = turn;
+    winner = GameLogic.getWinner(board);
+    turn = GameLogic.getTurn(turn);
+    gameState = GameLogic.getGameState(winner, board);
 
-    if (winner !== undefined || (board.join('').length === 9)) {
-      gameState = 'finished';
-    } else if (winner === 'none' && (board.join('').length === 9)) {
-      gameState = 'draw';
-    } else if (board.includes('X') || board.includes('O')) {
-      gameState = 'started';
-    } else {
-      gameState = 'not_started';
-    }
-
-    return { board, turn, winner, gameState }
+    return { board, turn, winner, gameState };
   },
 
-  setTitle : function(props) {
+  getGameState : function(winner, board) {
+    if (winner === 'none' && (board.join('').length === 9)) {
+      return 'draw';
+    } else if (winner !== undefined || (board.join('').length === 9)) {
+      return 'finished';
+    } else if (board.includes('X') || board.includes('O')) {
+      return 'started';
+    } else {
+      return 'not_started';
+    }
+  },
+
+  setGameTitle : function(props) {
     const { winner, turn, gameState } = props;
 
     switch (gameState) {
@@ -47,15 +49,15 @@ let GameLogic = {
       case 'finished':
        return `Player ${winner} won!`;
       default:
-        return 'Start a new game!';
+        return 'Player X goes first!';
     }
   },
 
-  checkTurn : function(turn) {
+  getTurn : function(turn) {
     return turn === 'X' ? 'O' : 'X';
   },
 
-  checkWinner : function(board) {
+  getWinner : function(board) {
     // horizontals
     if (GameLogic.checkEqual(board[0]+board[1]+board[2])) return board[0];
     if (GameLogic.checkEqual(board[3]+board[4]+board[5])) return board[3];
