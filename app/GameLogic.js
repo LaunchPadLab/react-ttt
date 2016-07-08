@@ -76,6 +76,6 @@ let GameLogic = {
         return 'Player X goes first!';
     }
   }
-}
+};
 
-export default GameLogic;
+export default GameLogic
