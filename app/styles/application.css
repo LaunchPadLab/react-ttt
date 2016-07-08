@@ -1,35 +1,26 @@
 #app {
-    margin: auto;
-    width: 50%;
-    padding-top: 20px;
+  margin: auto;
+  width: 50%;
+  padding-top: 20px;
 }
 
-#game {
-    width: 300px;
-    height: 300px;
-    padding: 0;
-    margin: 0;
-    float: left;
-    outline: 1px solid #b4b4b4;
+#board {
+  margin-top: 10px;
+  width: 300px;
+  height: 300px;
+  outline: 2px solid #b4b4b4;
 }
 
-#game .square {
-    width: 100px;
-    height: 100px;
-    outline: 1px solid #b4b4b4;
-    float: left;
-    line-height: 88px;
-    text-align: center;
-    font-size: 50px;
-}
-
-#gameInfo {
-    height: 306px;
-    width: 150px;
-    padding-left: 35px;
-    float: left;
+#board .square {
+  width: 100px;
+  height: 100px;
+  outline: 1px solid #b4b4b4;
+  float: left;
+  line-height: 88px;
+  text-align: center;
+  font-size: 50px;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }

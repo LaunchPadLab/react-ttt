@@ -1,5 +1,4 @@
 import React from 'react';
-import GameInfo from './GameInfo';
 import Square from './Square';
 import GameLogic from '../GameLogic';
 
@@ -8,26 +7,11 @@ export default class Game extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      board: [],
-      turn: '',
-      winner: undefined,
-      gameState: ''
-    };
+    this.state = GameLogic.getInitialState();
   }
 
   clickHandler(position) {
-
-    const { board, turn, winner, gameState } = GameLogic.setGameState(this.state, position);
-
-    this.setState (
-      {
-        board: board,
-        turn: turn,
-        winner: winner,
-        gameState: gameState
-      }
-    );
+    this.setState(GameLogic.setGameState(this.state, position));
   }
 
   newGame() {
@@ -40,28 +24,32 @@ export default class Game extends React.Component {
 
     return (
       <div>
-        {
-          gameState ?
 
-            <div id="game">
+        <button
+          className="btn btn-primary"
+          onClick={this.newGame.bind(this)}>
 
-              {board.map((square, pos) =>
+          New Game
+        </button>
 
-                <Square
-                  key={pos}
-                  value={square}
-                  clickHandler={this.clickHandler.bind(this, pos)} />
-              )}
-            </div>
+        <span style={{paddingLeft: '5px'}}>
+          <b>
+            { winner ?
+                `${winner} won!!` : `It is ${turn}'s turn`
+            }
+            </b>
+        </span>
 
-          : null
-        }
+        <div id="board">
 
-        <GameInfo
-          turn={turn}
-          winner={winner}
-          resetAction={this.newGame.bind(this)}
-          gameState={gameState} />
+          {board.map((square, idx) =>
+
+            <Square
+              key={idx}
+              value={square}
+              clickHandler={this.clickHandler.bind(this, idx)} />
+          )}
+        </div>
       </div>
     );
   }
