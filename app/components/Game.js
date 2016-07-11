@@ -20,7 +20,7 @@ export default class Game extends React.Component {
 
   render() {
 
-    const { board, gameState, turn, winner } = this.state;
+    const { board, turn, winner } = this.state;
 
     return (
       <div>
