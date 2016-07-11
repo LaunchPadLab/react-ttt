@@ -33,11 +33,7 @@ export default class Game extends React.Component {
         </button>
 
         <span style={{paddingLeft: '5px'}}>
-          <b>
-            { winner ?
-                `${winner} won!!` : `It is ${turn}'s turn`
-            }
-            </b>
+          <b>{GameLogic.setGameTitle(this.state)}</b>
         </span>
 
         <div id="board">
