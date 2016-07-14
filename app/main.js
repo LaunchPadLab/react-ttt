@@ -1,3 +1,4 @@
+// I need the imports for Brunch
 import ReactDOM from 'react-dom';
 import React from 'react';
 
@@ -92,19 +93,16 @@ var GameLogic = {
   }
 };
 
+var h = React.DOM;
+
 var Square = React.createClass({
 
   render: function() {
 
-    return (
-
-      <div
-        className="square"
-        onClick={this.props.clickHandler}>
-
-        {this.props.value}
-      </div>
-    );
+    return h.div({
+      className: 'square',
+      onClick: this.props.clickHandler
+    }, this.props.value);
   }
 });
 
@@ -126,43 +124,36 @@ var Game = React.createClass({
 
     var clickHandler = this.clickHandler;
 
-    return (
-      <div>
+    var squares = this.state.board.map(function(square, idx) {
+      function handleClick() {
+        return clickHandler(idx);
+      }
 
-        <button
-          className="btn btn-primary"
-          onClick={this.newGame}>
+      return React.createElement(Square,{
+        key: idx,
+        idx: idx,
+        value: square,
+        clickHandler: handleClick
+      });
+    });
 
-          New Game
-        </button>
+    return h.div(null,
 
-        <span style={{paddingLeft: '5px'}}>
-          <b>{this.state.message}</b>
-        </span>
+      h.button({
+        className: 'btn btn-primary',
+        onClick: this.newGame
+      }, 'New Game'),
 
-        <div id="board">
+      h.span({
+        style: {paddingLeft: '5px'}
+      }, h.b(null, this.state.message)),
 
-          {
-            this.state.board.map(function(square, idx) {
-
-              function handleClick() {
-                return clickHandler(idx);
-              }
-
-              return (
-                <Square
-                  key={idx}
-                  idx={idx}
-                  value={square}
-                  clickHandler={handleClick} />
-              );
-            })
-          }
-        </div>
-      </div>
+      h.div({
+        id: 'board'
+      }, squares)
     );
   }
 });
 
 
-ReactDOM.render(<Game/>, document.getElementById('app'));
+ReactDOM.render(React.createElement(Game), document.getElementById('app'));
