@@ -1,4 +1,3 @@
-// I need the imports for Brunch
 var ReactDOM = require('react-dom');
 var React = require('react');
 
@@ -129,6 +128,7 @@ var GameLogic = {
 
 /**
  * A helper so I don't have to type 'React.DOM' a gazillion times.
+ *
  */
 var h = React.DOM;
 
@@ -156,7 +156,6 @@ var Square = React.createClass({
  * React Component that represents our entire game.
  *
  * @return {ReactElement} - A React Element that will manage our game.
- *
  */
 var Game = React.createClass({
 
@@ -209,15 +208,18 @@ var Game = React.createClass({
 
 /**
  * Create our React App
+ *
  */
 var reactApp = React.createElement(Game);
 
 /**
  * Set the DOM destination for our React App
+ *
  */
 var rootElem = document.getElementById('app');
 
 /**
  * Render our React app into the root element and watch the magic!
+ *
  */
 ReactDOM.render(reactApp, rootElem);
