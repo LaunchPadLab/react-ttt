@@ -1,8 +1,19 @@
 // I need the imports for Brunch
-import ReactDOM from 'react-dom';
-import React from 'react';
+var ReactDOM = require('react-dom');
+var React = require('react');
 
-var winningConditions = [
+/********************/
+/*                  */
+/*    Game Logic    */
+/*                  */
+/********************/
+
+/**
+ * The winning conditions.
+ *
+ * @private
+ */
+var _winningConditions = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -13,13 +24,21 @@ var winningConditions = [
   [2, 4, 8]
 ];
 
+/**
+ * Determines if the current move has won the game.
+ *
+ * @private
+ * @param {Array} board - The board
+ * @param {string} turn - The current turn
+ * @returns {String|undefined} The winner or undefined if there is none
+ */
 function _getWinner(board, turn) {
 
   var indices = board.reduce(function(acc, val, idx) {
     return val === turn ? acc.concat(idx) : acc;
   }, []);
 
-  var isWinner = winningConditions.reduce(function(acc, condition) {
+  var isWinner = _winningConditions.reduce(function(acc, condition) {
     return acc || condition.reduce(function(single, val) {
       return single && (indices.indexOf(val) !== -1);
     }, true);
@@ -28,8 +47,17 @@ function _getWinner(board, turn) {
   return isWinner ? turn : undefined;
 }
 
+/**
+ * The public interface for Game Logic
+ *
+ */
 var GameLogic = {
 
+  /**
+   * Returns the initial state of the game.
+   *
+   * @returns {Object} The initial state of the game
+   */
   getInitialState: function() {
     return {
         board: [
@@ -93,8 +121,26 @@ var GameLogic = {
   }
 };
 
+/****************************/
+/*                          */
+/*    React Tic Tac Toe!    */
+/*                          */
+/****************************/
+
+/**
+ * A helper so I don't have to type 'React.DOM' a gazillion times.
+ */
 var h = React.DOM;
 
+/**
+ * React Component that represents one square on our board.
+ *
+ * @return {ReactElement} - A React Element that expects the following props:
+ *
+ *   clickHandler: {Function}
+ *   value: {string}
+ *
+ */
 var Square = React.createClass({
 
   render: function() {
@@ -106,6 +152,12 @@ var Square = React.createClass({
   }
 });
 
+/**
+ * React Component that represents our entire game.
+ *
+ * @return {ReactElement} - A React Element that will manage our game.
+ *
+ */
 var Game = React.createClass({
 
   getInitialState: function() {
@@ -155,5 +207,17 @@ var Game = React.createClass({
   }
 });
 
+/**
+ * Create our React App
+ */
+var reactApp = React.createElement(Game);
 
-ReactDOM.render(React.createElement(Game), document.getElementById('app'));
+/**
+ * Set the DOM destination for our React App
+ */
+var rootElem = document.getElementById('app');
+
+/**
+ * Render our React app into the root element and watch the magic!
+ */
+ReactDOM.render(reactApp, rootElem);

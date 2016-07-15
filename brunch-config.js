@@ -7,11 +7,5 @@ module.exports = {
       }
     },
     stylesheets: {joinTo: 'app.css'}
-  },
-
-  plugins: {
-    babel: {
-      presets: ['es2015']
-    }
   }
 };
