@@ -71,6 +71,13 @@ var GameLogic = {
       }
   },
 
+  /**
+   * Return the new state of the game.
+   *
+   * @param {Object} state - The current state of the game
+   * @param {Integer} position - The index of the current move
+   * @returns {Object} - The updated state of the game
+   */
   updateGame: function(state, position) {
 
     // If the game is not in progress, do change the state
@@ -149,6 +156,18 @@ var Square = React.createClass({
       className: 'square',
       onClick: this.props.clickHandler
     }, this.props.value);
+
+    /**
+     * Equivalent JSX
+     *
+     * <div
+     *   className="square"
+     *   onClick={this.props.clickHandler}>
+     *
+     *   {this.props.value}
+     *
+     * </div>
+     */
   }
 });
 
@@ -173,19 +192,34 @@ var Game = React.createClass({
 
   render: function() {
 
+    // I have to do this because inside of the function given to the
+    // map function I won't have access to 'this'
     var clickHandler = this.clickHandler;
 
+    // squares is an array of Square React elements corresponding
+    // to each value in this.state.board
     var squares = this.state.board.map(function(square, idx) {
+
       function handleClick() {
         return clickHandler(idx);
       }
 
-      return React.createElement(Square,{
+      return React.createElement(Square, {
         key: idx,
         idx: idx,
         value: square,
         clickHandler: handleClick
       });
+
+      /**
+       * Equivalent JSX
+       *
+       * <Square
+       *   key={idx}
+       *   idx={idx}
+       *   value={square}
+       *   clickHandler={handleClick} />
+       */
     });
 
     return h.div(null,
@@ -203,6 +237,27 @@ var Game = React.createClass({
         id: 'board'
       }, squares)
     );
+
+    /**
+     * Equivalent JSX
+     *
+     * <div>
+     *
+     *   <button
+     *     className="btn btn-primary"
+     *     onClick={this.newGame}>
+     *     New Game
+     *   </button>
+     *
+     *   <span style={{paddingLeft: '5px'}}>
+     *     <b>{this.state.message}</b>
+     *   </span>
+     *
+     *   <div id="board">
+     *     {squares}
+     *   </div>
+     * </div>
+     */
   }
 });
 
