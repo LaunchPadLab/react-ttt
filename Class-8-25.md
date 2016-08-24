@@ -11,3 +11,4 @@ A collection of resources to use during and after the class are below.
 * [React](facebook.github.io/react)
 * [Babel](https://babeljs.io/)
 * [LaunchPad Lab](launchpadlab.com)
+* The fancy version: https://github.com/LaunchPadLab/react-ttt
