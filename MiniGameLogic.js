@@ -27,17 +27,15 @@ var _winningConditions = [
  * @param {string} turn - The current turn
  * @returns {String|undefined} The winner or undefined if there is none
  */
-function getWinner(board, turn) {
+function isWinner(board, turn) {
 
   var indices = board.reduce(function(acc, val, idx) {
     return val === turn ? acc.concat(idx) : acc;
   }, []);
 
-  var isWinner = _winningConditions.reduce(function(acc, condition) {
+  return _winningConditions.reduce(function(acc, condition) {
     return acc || condition.reduce(function(single, val) {
       return single && (indices.indexOf(val) !== -1);
     }, true);
   }, false);
-
-  return isWinner ? turn : undefined;
 }
