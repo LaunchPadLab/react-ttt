@@ -3,8 +3,8 @@
 A collection of resources to use during and after the class are below.
 
 ### During
-* [New Pen](http://codepen.io/pen/)
-* [Pens](http://codepen.io/collection/ANzYYa/)
+* <a href="http://codepen.io/pen/" target="_blank">New Pen</a>
+* <a href="http://codepen.io/collection/ANzYYa/" target="_blank">Pens</a>
 
 ### After
 * [Slides](https://slides.com/dcorwin/ga-intro-to-react-2)
